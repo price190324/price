@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "View" %}{% endblock title %}
+{% block content %}
+<h2>{% trans "product" %}</h2>
+<div class="row justify-content-center">
+	<div class="card" style="width:100%">
+		<div class="card-header">
+			<h4>{{ product.category }}</h4>		
+			<h2>{{ product.title }}</h2>		
+		</div>
+		<div class="card-body">
+			<div class="row">
+				<div class="col-md-8">				
+					<p>{{ product.description | linebreaks }}</p>
+					<p>{% trans "code" %}: {{ product.code }}</p>
+					{% if product.price != None %}
+						<p>{% trans "price" %}: {{ product.price }}</p>	
+					{% endif %}						
+				</div>
+				<div class="col-md-4">
+					{% if product.photo_url != None %}
+						<a href="{{ product.url }}" target="_blank">
+							<img style="width:100%; max-width:400px;" src="{{ product.photo_url}}" alt="{{ product.photo_url }}">
+						</a>
+					{% endif %}
+				</div>
+			</div>				
+		
+		</div>
+		<div class="card-footer">
+			<p>{{ product.salesman }}</p>
+			<p>{{ product.dateb | date:"d.m.Y H:i"}}</p>		
+		</div>		
+	</div>
+	<br>
+	<div class="div-button-center">
+		<a class="btn btn-outline-info" style="width:120px" href="{% url 'product_index' %}">{% trans "Back" %}</a> 	
+	</div>	
+</div>
+{% endblock content %}

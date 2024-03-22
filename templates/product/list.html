@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "List" %}{% endblock title %}
+{% block header %}{% endblock header %}
+{% block content %}
+<h2>{% trans "products" %}</h2>
+<hr>
+{% if product.count > 0 %}
+<div class="row">
+	<table id="myTable" class="table-manager" style="width:100%">
+		<thead>
+			<tr>
+				<th><p>{% trans "category_title" %}</p></th>
+				<th><p>{% trans "product_title" %}</p></th>
+				<th><p>{% trans "price" %}</p></th>
+				<th><p>{% trans "code" %}</p></th>
+				<th><p>{% trans "salesman" %}</p></th>
+				<th><p>{% trans "dateb" %}</p></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for p in product %}
+			<tr>
+				<td><p>{{ p.category }}</p></td>	
+				<td><p><a href="{{ p.url }}" target="_blank">{{ p.title }}</a></p></td>	
+				<td>
+					{% if p.price != None %}
+					<p>{{ p.price }}</p>
+					{% endif %}
+				</td>	
+				<td><p>{{ p.code }}</p></td>	
+				<td><p>{{ p.salesman }}</p></td>	
+				<td><p>{{ p.dateb | date:"d.m.Y H:i"}}</p></td>	
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% endif %}
+{% endblock content %}
+
