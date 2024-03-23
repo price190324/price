@@ -1,5 +1,6 @@
 __pychache__/
 *.pyc
 documents/
+get/
 backup/
 db.sqlite3
