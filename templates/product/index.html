@@ -26,7 +26,9 @@
 				<td><p>{{ p.category }}</p></td>	
 				<td><p><a href="{{ p.url }}" target="_blank">{{ p.title }}</a></p></td>	
 				<td>
-					<p>{{ p.price | default_if_none:"" }}</p>
+					{% if p.price != 0 %}
+					<p>{{ p.price | stringformat:"1.0f" }} 〒</p>
+					{% endif %}
 				</td>	
 				<td><p>{{ p.code }}</p></td>	
 				<td><p>{{ p.salesman }}</p></td>	

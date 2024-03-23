@@ -104,6 +104,46 @@ def report_index(request):
         print(exception)
         return HttpResponse(exception)
 
+# Отчет 1
+@login_required
+@group_required("Managers")
+def report_1(request):
+    try:
+        report = Product.objects.raw("""
+SELECT 1 as id, salesman.title AS salesman_title, category.title AS category_title, product.title,
+(SELECT price FROM product p WHERE p.salesman_id=product.salesman_id AND p.category_id=product.category_id AND p.title=product.title AND p.dateb=(SELECT MAX(dateb) FROM product d WHERE p.salesman_id=d.salesman_id AND p.category_id=d.category_id AND p.title=d.title)) AS current_price,
+(SELECT MAX(price) FROM product p WHERE p.salesman_id=product.salesman_id AND p.category_id=product.category_id AND p.title=product.title) AS max_price,
+(SELECT MIN(price) FROM product p WHERE p.salesman_id=product.salesman_id AND p.category_id=product.category_id AND p.title=product.title) AS min_price,
+(SELECT AVG(price) FROM product p WHERE p.salesman_id=product.salesman_id AND p.category_id=product.category_id AND p.title=product.title) AS avg_price
+FROM product LEFT JOIN salesman ON product.salesman_id = salesman.id
+LEFT JOIN category ON product.category_id = category.id
+GROUP BY salesman.title, category.title, product.title
+""")
+        return render(request, "report/report_1.html", {"report": report,})                
+    except Exception as exception:
+        print(exception)
+        return HttpResponse(exception)
+
+# Отчет 2
+@login_required
+@group_required("Managers")
+def report_2(request):
+    try:
+        return render(request, "report/report_2.html", {})         
+    except Exception as exception:
+        print(exception)
+        return HttpResponse(exception)
+
+# Отчет 3
+@login_required
+@group_required("Managers")
+def report_3(request):
+    try:
+        return render(request, "report/report_3.html", {})        
+    except Exception as exception:
+        print(exception)
+        return HttpResponse(exception)
+
 ###################################################################################################
 
 # Список для изменения с кнопками создать, изменить, удалить
@@ -298,8 +338,45 @@ def product_index(request):
 #@group_required("Managers")
 def product_list(request):
     try:
+        start_date = datetime(datetime.now().year, 1, 1, 0, 0).strftime('%Y-%m-%d') 
+        finish_date = datetime(datetime.now().year, datetime.now().month, datetime.now().day, 23, 59).strftime('%Y-%m-%d') 
+        salesman = Salesman.objects.all().order_by('title')
+        category = Category.objects.all().order_by('title')
         product = Product.objects.all().order_by('category__title', 'title', 'dateb')
-        return render(request, "product/list.html", {"product": product,})
+        if request.method == "POST":
+            # Определить какая кнопка нажата
+            if 'searchBtn' in request.POST:
+                # Поиск по дате
+                start_date = request.POST.get("start_date")
+                #print(start_date)
+                finish_date = request.POST.get("finish_date")
+                finish_date = str(datetime.strptime(finish_date, "%Y-%m-%d") + timedelta(days=1))
+                #print(finish_date)
+                product = product.filter(dateb__range=[start_date, finish_date])
+                finish_date = request.POST.get("finish_date")
+                # Поиск по категории
+                selected_item_category = request.POST.get('item_category')
+                #print(selected_item_category)
+                if selected_item_category != '-----':
+                    category_query = Category.objects.filter(title = selected_item_category).only('id').all()
+                    product = product.filter(category_id__in = category_query)
+                # Поиск по продавцу
+                selected_item_salesman = request.POST.get('item_salesman')
+                #print(selected_item_salesman)
+                if selected_item_salesman != '-----':
+                    salesman_query = Salesman.objects.filter(title = selected_item_salesman).only('id').all()
+                    product = product.filter(salesman_id__in = salesman_query)      
+                # Поиск по названию 
+                title_search = request.POST.get("title_search")
+                #print(title_search)                
+                if title_search != '':
+                    product = product.filter(title__contains = title_search)                
+                 
+                return render(request, "product/list.html", {"product": product, "category": category, "selected_item_category": selected_item_category,  "salesman": salesman, "selected_item_salesman": selected_item_salesman, "start_date": start_date, "finish_date": finish_date, "title_search": title_search })    
+            else:          
+                return render(request, "product/list.html", {"product": product, "category": category, "salesman": salesman, "start_date": start_date, "finish_date": finish_date })
+        else:
+            return render(request, "product/list.html", {"product": product, "category": category, "salesman": salesman, "start_date": start_date, "finish_date": finish_date })           
     except Exception as exception:
         print(exception)
         return HttpResponse(exception)

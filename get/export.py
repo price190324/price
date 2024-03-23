@@ -189,7 +189,7 @@ class ExportWindow(QMainWindow):
                 sql = "DELETE FROM basket"
                 parameters= []
                 # Выполнить запрос sql c параметрами parameters
-                #database.executeSQL(sql, parameters)
+                database.executeSQL(sql, parameters)
                 common.writing_log("Информация", "Экспорт в Django завершен")
             # Обновить данные в таблице
             self.select_data("")              

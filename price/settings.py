@@ -90,10 +90,10 @@ WSGI_APPLICATION = 'price.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    #'default': {
-    #    'ENGINE': 'django.db.backends.sqlite3',
-    #    'NAME': BASE_DIR / 'db.sqlite3',
-    #}
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 
     #'default': {
     #    'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -104,14 +104,14 @@ DATABASES = {
     #    'PORT' : '5432',
     #}
     
-    'default': {
-	    'ENGINE': 'django.db.backends.postgresql_psycopg2',
-	    'NAME': 'price_8g0n',
-	    'USER' : 'price_admin',
-	    'PASSWORD' : '49c1nP4FWyzYTAuAXelSTuJ5rGbjGJUZ',
-	    'HOST' : 'dpg-cnv63nn79t8c73d58mc0-a.frankfurt-postgres.render.com',
-	    'PORT' : '5432',
-    }
+    #'default': {
+	   # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+	   # 'NAME': 'price_8g0n',
+	   # 'USER' : 'price_admin',
+	   # 'PASSWORD' : '49c1nP4FWyzYTAuAXelSTuJ5rGbjGJUZ',
+	   # 'HOST' : 'dpg-cnv63nn79t8c73d58mc0-a.frankfurt-postgres.render.com',
+	   # 'PORT' : '5432',
+    #}
 
 
 }

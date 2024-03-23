@@ -4,6 +4,76 @@
 {% block header %}{% endblock header %}
 {% block content %}
 <h2>{% trans "products" %}</h2>
+<div class="row" style="margin: 10px">
+	<form method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+		<table>
+			<tbody>
+				<tr>
+					<td>
+						<p>{% trans "Date range" %}</p>
+					</td>
+					<td>
+						<p>
+							<input type="date" value="{{start_date}}" name ="start_date" id ="start_date">
+							<input type="date" value="{{finish_date}}" name = "finish_date" id ="finish_date">
+						</p>
+					</td>
+				</tr>	
+				<tr>
+					<td>
+						<p>{% trans "salesman" %}</p>
+					</td>
+					<td>
+						<p>
+						<select name="item_salesman" class="chosen" style="margin:5px">
+							<option value="-----">-----</option>
+							{% for entry in salesman %}
+								{% if entry.title == selected_item_salesman %}
+									<option value="{{ entry.title }}" selected="selected">{{ entry.title }}</option>
+								{% else %}
+									<option value="{{ entry.title }}">{{ entry.title }}</option>
+								{% endif %}
+							{% endfor %}
+						</select>
+						</p>
+					</td>
+				</tr>						
+				<tr>
+					<td>
+						<p>{% trans "category" %}</p>
+					</td>
+					<td>
+						<p>
+						<select name="item_category" class="chosen" style="margin:5px">
+							<option value="-----">-----</option>
+							{% for entry in category %}
+								{% if entry.title == selected_item_category %}
+									<option value="{{ entry.title }}" selected="selected">{{ entry.title }}</option>
+								{% else %}
+									<option value="{{ entry.title }}">{{ entry.title }}</option>
+								{% endif %}
+							{% endfor %}
+						</select>
+						</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p>{% trans "title" %}</p>
+					</td>
+					<td>
+						<p><input type="search" value="{{title_search}}" name="title_search"></p>		
+					</td>
+				</tr>
+			</tbody>
+		</table>				
+		<div class="row">
+			<button class="btn btn-outline-success" name="searchBtn" style="width:120px; margin:5px">{% trans "Search" %}</button>
+			<button class="btn btn-outline-primary" name="resetBtn" type="submit" onClick="window.location.reload();" style="width:120px; margin:5px">{% trans "Reset" %}</button>
+		</div>
+	</form>
+</div>
 <hr>
 {% if product.count > 0 %}
 <div class="row">
@@ -24,8 +94,8 @@
 				<td><p>{{ p.category }}</p></td>	
 				<td><p><a href="{{ p.url }}" target="_blank">{{ p.title }}</a></p></td>	
 				<td>
-					{% if p.price != None %}
-					<p>{{ p.price }}</p>
+					{% if p.price != 0 %}
+					<p>{{ p.price | stringformat:"1.0f" }} 〒</p>
 					{% endif %}
 				</td>	
 				<td><p>{{ p.code }}</p></td>	

@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load static %}
-{% block title %}{% trans "Reports" %}{% endblock title %}
+{% block title %}{% trans "reports" %}{% endblock title %}
 {% block header %}{% endblock header %}
 {% block content %}
 <div class="div-width-100-text-center">
-	<h3>{% trans "Reports" %}</h3>
+	<h3>{% trans "reports" %}</h3>
 </div>
 <div style="margin-top:10px">
 	<ul>
-		<li><a href="{% url 'report_1' %}">{% trans "schedules" %}</a></li>	
+		<li><a href="{% url 'report_1' %}">{% trans "current, max, min, avg" %}</a></li>	
 		<li><a href="{% url 'report_2' %}">{% trans "visits" %}</a></li>	
 		<li><a href="{% url 'report_3' %}">{% trans "ratings" %}</a></li>	
 	</ul>
