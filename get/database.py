@@ -34,9 +34,9 @@ def init_db():
         ##### basket #####
         ##################
 
-        # Проверка наличия таблицы 
+        # Проверка наличия таблицы SQLite
         #cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='basket'")
-        # Проверка наличия таблицы 
+        # Проверка наличия таблицы PostgreSQL
         cursor.execute("SELECT 1 FROM pg_tables WHERE tablename = 'basket'")
         result = cursor.fetchall()
         if len(result) > 0:
@@ -66,9 +66,9 @@ def init_db():
         ##### salesman #####
         ####################
 
-        # Проверка наличия таблицы 
+        # Проверка наличия таблицы SQLite
         #cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='salesman'")
-        # Проверка наличия таблицы 
+        # Проверка наличия таблицы PostgreSQL
         cursor.execute("SELECT 1 FROM pg_tables WHERE tablename = 'salesman'")
         result = cursor.fetchall()
         if len(result) > 0:
@@ -96,9 +96,9 @@ def init_db():
         ##### category #####
         ####################
 
-        # Проверка наличия таблицы 
+        # Проверка наличия таблицы SQLite
         #cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='category'")
-        # Проверка наличия таблицы 
+        # Проверка наличия таблицы PostgreSQL
         cursor.execute("SELECT 1 FROM pg_tables WHERE tablename = 'category'")
         result = cursor.fetchall()
         if len(result) > 0:
@@ -125,9 +125,9 @@ def init_db():
         ##### product #####
         ###################
 
-        # Проверка наличия таблицы 
+        # Проверка наличия таблицы SQLite
         #cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='product'")
-        # Проверка наличия таблицы 
+        # Проверка наличия таблицы PostgreSQL
         cursor.execute("SELECT 1 FROM pg_tables WHERE tablename = 'product'")
         result = cursor.fetchall()
         if len(result) > 0:
@@ -206,6 +206,8 @@ def export_to_database(data):
                 price=""
                 for i in d[6]:
                     if i.isdigit(): price+=i 
+                if price == "":
+                    price = "0"                
                 parameters.append(price)
                 #parameters.append(price)
                 #print(parameters[6])
@@ -217,6 +219,9 @@ def export_to_database(data):
                 #print(parameters[8])
                 print(str(parameters))
                 # Выполнить запрос sql c параметрами parameters
+                sql = "INSERT INTO basket (url, dateb, salesman, category, title, description, price, code, photo_url) VALUES  ('" + str(d[0]) + "', '" + str(d[1]) + "', '"  + str(d[2]) + "', '" + str(d[3]) + "', '" + str(d[4]) + "', '" + str(d[5]) + "', " + price + ", '" + str(d[7]) + "', '" + str(d[8]) +"')"                    
+                parameters = []
+                print(sql)
                 executeSQL(sql, parameters)
             except Exception as exception:
                 print(exception)
@@ -243,7 +248,7 @@ def executeSQL(sql, parameters):
         conn = connector.get_connection()
         # Объект cursor, позволяет взаимодействовать с базой данных             
         cursor = conn.cursor()            
-        # Включить ограничения FOREIGN KEY 
+        # Включить ограничения FOREIGN KEY для SQLite
         #cursor.execute("PRAGMA foreign_keys=ON")                  
         # С помощью метода execute объекта cursor можно выполнить запрос в базу данных из Python.
         cursor.execute(sql, parameters)

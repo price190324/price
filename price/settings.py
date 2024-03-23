@@ -106,10 +106,10 @@ DATABASES = {
     
     'default': {
 	    'ENGINE': 'django.db.backends.postgresql_psycopg2',
-	    'NAME': 'price_fqs0',
+	    'NAME': 'price_8g0n',
 	    'USER' : 'price_admin',
-	    'PASSWORD' : '916jz1eWwYozAhMAu47kzAblzwjmKNS2',
-	    'HOST' : 'dpg-cnus4c0l6cac73akio6g-a.frankfurt-postgres.render.com',
+	    'PASSWORD' : '49c1nP4FWyzYTAuAXelSTuJ5rGbjGJUZ',
+	    'HOST' : 'dpg-cnv63nn79t8c73d58mc0-a.frankfurt-postgres.render.com',
 	    'PORT' : '5432',
     }
 

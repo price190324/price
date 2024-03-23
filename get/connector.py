@@ -13,8 +13,8 @@ def get_connection():
     try:
         #conn = sqlite3.connect('scraping.sqlite3')
         #conn = sqlite3.connect('C:/django/2023-2024/price/db.sqlite3')
-        conn = psycopg2.connect(user="customer", password="customer", host="127.0.0.1", port="5432", database="price") 
-        #conn = psycopg2.connect("postgres://price_admin:916jz1eWwYozAhMAu47kzAblzwjmKNS2@dpg-cnus4c0l6cac73akio6g-a.frankfurt-postgres.render.com/price_fqs0", sslmode="require")
+        #conn = psycopg2.connect(user="customer", password="customer", host="127.0.0.1", port="5432", database="price") 
+        conn = psycopg2.connect("postgres://price_admin:49c1nP4FWyzYTAuAXelSTuJ5rGbjGJUZ@dpg-cnv63nn79t8c73d58mc0-a.frankfurt-postgres.render.com/price_8g0n", sslmode="require")
 
         return conn  
     except Exception as error:

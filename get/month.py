@@ -13,7 +13,7 @@ from datetime import datetime, timedelta
 HEADER = ["URL (Карточка)", "Дата", "Продавец", "Категория", "Название", "Описание", "Цена", "Артикул", "Фотография"]
 # Функция отладки
 DEBUG = False
-DEBUG = True
+#DEBUG = True
 # Элемент класса Firefox, Chrome, Edge.
 #driver = webdriver.Firefox()
 driver = webdriver.Chrome()

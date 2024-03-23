@@ -174,17 +174,22 @@ class ExportWindow(QMainWindow):
                     #print(code)
                     photo_url = row[8]
                     #print(photo_url)
-                    # SQL-запрос новая запись 
-                    sql = "INSERT INTO product (url, dateb, salesman_id, category_id, title, description, price, code, photo_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"                    
+                    ## SQL-запрос новая запись SQLite
+                    #sql = "INSERT INTO product (url, dateb, salesman_id, category_id, title, description, price, code, photo_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"                    
+                    ## Параметры запроса
+                    #parameters = [url, dateb, self.get_salesman_id(salesman), self.get_category_id(category), title, description, price, code, photo_url]
+                    # SQL-запрос новая запись PostgreSQL
+                    sql = "INSERT INTO product (url, dateb, salesman_id, category_id, title, description, price, code, photo_url) VALUES ('" + url + "', '" + str(dateb) + "', " + str(self.get_salesman_id(salesman)) + ", " + str(self.get_category_id(category)) + ", '" + title + "', '" + description + "', " + str(price) + ", '" + code + "', '" + photo_url +"')"                    
+                    print(sql)
                     # Параметры запроса
-                    parameters = [url, dateb, self.get_salesman_id(salesman), self.get_category_id(category), title, description, price, code, photo_url]
+                    parameters = []
                     # Выполнить запрос sql c параметрами parameters
                     database.executeSQL(sql, parameters)
                 # Очистить корзину
                 sql = "DELETE FROM basket"
                 parameters= []
                 # Выполнить запрос sql c параметрами parameters
-                database.executeSQL(sql, parameters)
+                #database.executeSQL(sql, parameters)
                 common.writing_log("Информация", "Экспорт в Django завершен")
             # Обновить данные в таблице
             self.select_data("")              
@@ -206,11 +211,14 @@ class ExportWindow(QMainWindow):
                     #print("Продавец '" + val + "' уже существует")        
                     return result[0]
             else:
-                # SQL-запрос новая запись 
-                #sql = "INSERT INTO salesman (title, site) VALUES (?, ?)"
-                sql = "INSERT INTO salesman  VALUES (?, ?)"
+                ## SQL-запрос новая запись SQLite
+                ##sql = "INSERT INTO salesman (title, site) VALUES (?, ?)"
+                ## Параметры запроса
+                #parameters = [val, ""]
+                # SQL-запрос новая запись PostgreSQL
+                sql = "INSERT INTO salesman  (title, site) VALUES ('" + val + "', '')"
                 # Параметры запроса
-                parameters = [val, ""]
+                parameters = []
                 # Выполнить запрос sql c параметрами parameters
                 database.executeSQL(sql, parameters)
                 # Поиск 
@@ -238,9 +246,12 @@ class ExportWindow(QMainWindow):
                     #print("Категория '" + val + "' уже существует")        
                     return result[0]
             else:
-                # SQL-запрос новая запись 
-                #sql = "INSERT INTO category (title) VALUES (?)"
-                sql = "INSERT INTO category VALUES (?)"
+                ## SQL-запрос новая запись SQLite
+                ##sql = "INSERT INTO category (title) VALUES (?)"
+                ## Параметры запроса
+                #parameters = [val]                
+                # SQL-запрос новая запись PostgreSQL
+                sql = "INSERT INTO category (title) VALUES ('" + val + "')"
                 # Параметры запроса
                 parameters = [val]
                 # Выполнить запрос sql c параметрами parameters
