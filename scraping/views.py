@@ -96,7 +96,7 @@ def report_1(request):
     try:
         report = Product.objects.raw("""
 SELECT 1 as id, product.salesman_id, salesman.title AS salesman_title, product.category_id, category.title AS category_title, product.title,
-(SELECT price FROM product p WHERE p.salesman_id=product.salesman_id AND p.category_id=product.category_id AND p.title=product.title AND p.dateb=(SELECT MAX(dateb) FROM product d WHERE p.salesman_id=d.salesman_id AND p.category_id=d.category_id AND p.title=d.title)) AS current_price,
+(SELECT price FROM product p WHERE p.salesman_id=product.salesman_id AND p.category_id=product.category_id AND p.title=product.title AND p.dateb=(SELECT MAX(dateb) FROM product d WHERE p.salesman_id=d.salesman_id AND p.category_id=d.category_id AND p.title=d.title) LIMIT 1) AS current_price,
 (SELECT MAX(price) FROM product p WHERE p.salesman_id=product.salesman_id AND p.category_id=product.category_id AND p.title=product.title) AS max_price,
 (SELECT MIN(price) FROM product p WHERE p.salesman_id=product.salesman_id AND p.category_id=product.category_id AND p.title=product.title) AS min_price,
 (SELECT AVG(price) FROM product p WHERE p.salesman_id=product.salesman_id AND p.category_id=product.category_id AND p.title=product.title) AS avg_price
@@ -144,7 +144,7 @@ def report_3(request):
     try:
         report = Product.objects.raw("""
 SELECT 1 as id, product.salesman_id, salesman.title AS salesman_title, product.category_id, category.title AS category_title, product.title,
-(SELECT price FROM product p WHERE p.salesman_id=product.salesman_id AND p.category_id=product.category_id AND p.title=product.title AND p.dateb=(SELECT MAX(dateb) FROM product d WHERE p.salesman_id=d.salesman_id AND p.category_id=d.category_id AND p.title=d.title)) AS current_price,
+(SELECT price FROM product p WHERE p.salesman_id=product.salesman_id AND p.category_id=product.category_id AND p.title=product.title AND p.dateb=(SELECT MAX(dateb) FROM product d WHERE p.salesman_id=d.salesman_id AND p.category_id=d.category_id AND p.title=d.title) LIMIT 1) AS current_price,
 COALESCE (
 (SELECT price FROM product p 
 WHERE p.salesman_id=product.salesman_id AND p.category_id=product.category_id AND p.title=product.title 
@@ -161,7 +161,7 @@ CASE
 		), 0) <> 0
 	THEN 
 		CAST(
-        (SELECT price FROM product p WHERE p.salesman_id=product.salesman_id AND p.category_id=product.category_id AND p.title=product.title AND p.dateb=(SELECT MAX(dateb) FROM product d WHERE p.salesman_id=d.salesman_id AND p.category_id=d.category_id AND p.title=d.title))*100 
+        (SELECT price FROM product p WHERE p.salesman_id=product.salesman_id AND p.category_id=product.category_id AND p.title=product.title AND p.dateb=(SELECT MAX(dateb) FROM product d WHERE p.salesman_id=d.salesman_id AND p.category_id=d.category_id AND p.title=d.title) LIMIT 1)*100 
         AS REAL)
         /
         CAST(
