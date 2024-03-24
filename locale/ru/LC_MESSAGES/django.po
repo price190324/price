@@ -1,0 +1,303 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-03-24 09:50+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+#: .\scraping\forms.py:56 .\scraping\models.py:39
+#: .\templates\product\index.html:18 .\templates\product\list.html:27
+#: .\templates\product\list.html:89 .\templates\report\report_1.html:17
+#: .\templates\report\report_2.html:17 .\templates\report\report_2.html:47
+#: .\templates\report\report_3.html:17 .\templates\salesman\create.html:5
+#: .\templates\salesman\edit.html:5 .\templates\salesman\read.html:5
+msgid "salesman"
+msgstr "Продавец"
+
+#: .\scraping\forms.py:57 .\scraping\models.py:76
+#: .\templates\category\index.html:14 .\templates\product\index.html:14
+#: .\templates\product\list.html:85 .\templates\report\report_1.html:18
+#: .\templates\report\report_2.html:18 .\templates\report\report_2.html:48
+#: .\templates\report\report_3.html:18
+msgid "category_title"
+msgstr "Название категории"
+
+#: .\scraping\forms.py:64 .\scraping\forms.py:84
+msgid "Wrong date and time format"
+msgstr "Неправильный формат даты или времени"
+
+#: .\scraping\models.py:37 .\scraping\models.py:89
+msgid "url"
+msgstr "Карточка товара"
+
+#: .\scraping\models.py:38 .\scraping\models.py:90
+#: .\templates\product\index.html:19 .\templates\product\list.html:90
+msgid "dateb"
+msgstr "Дата и время парсинга"
+
+#: .\scraping\models.py:40 .\templates\category\create.html:5
+#: .\templates\category\edit.html:5 .\templates\category\read.html:5
+#: .\templates\product\list.html:46
+msgid "category"
+msgstr "Категория"
+
+#: .\scraping\models.py:41 .\templates\news\index.html:15
+#: .\templates\product\list.html:65
+msgid "title"
+msgstr "Название"
+
+#: .\scraping\models.py:42 .\scraping\models.py:94
+msgid "description"
+msgstr "Описание"
+
+#: .\scraping\models.py:43 .\scraping\models.py:95
+#: .\templates\product\index.html:16 .\templates\product\list.html:87
+#: .\templates\product\read.html:18
+msgid "price"
+msgstr "Цена"
+
+#: .\scraping\models.py:44 .\scraping\models.py:96
+#: .\templates\product\index.html:17 .\templates\product\list.html:88
+#: .\templates\product\read.html:16
+msgid "code"
+msgstr "Код товара"
+
+#: .\scraping\models.py:45 .\scraping\models.py:97
+msgid "photo_url"
+msgstr "Ссылка на фотографию"
+
+#: .\scraping\models.py:62 .\templates\salesman\index.html:14
+msgid "salesman_title"
+msgstr "Название продавца"
+
+#: .\scraping\models.py:63 .\templates\salesman\index.html:15
+msgid "site"
+msgstr "Адрес сайта"
+
+#: .\scraping\models.py:93 .\templates\product\index.html:15
+#: .\templates\product\list.html:86 .\templates\report\report_1.html:19
+#: .\templates\report\report_2.html:19 .\templates\report\report_2.html:49
+#: .\templates\report\report_3.html:19
+msgid "product_title"
+msgstr "Название товара"
+
+#: .\scraping\models.py:117 .\templates\news\index.html:14
+msgid "daten"
+msgstr "Дата"
+
+#: .\scraping\models.py:118
+msgid "news_title"
+msgstr "Заголовок новости"
+
+#: .\scraping\models.py:119
+msgid "news_details"
+msgstr "Детали новости"
+
+#: .\scraping\models.py:120
+msgid "news_photo"
+msgstr "Фотография"
+
+#: .\templates\base.html:48
+msgid "Home"
+msgstr "Главная"
+
+#: .\templates\base.html:50 .\templates\base.html:67
+#: .\templates\product\index.html:6 .\templates\product\list.html:7
+msgid "products"
+msgstr "Товары"
+
+#: .\templates\base.html:53 .\templates\base.html:69
+#: .\templates\news\index.html:3 .\templates\news\index.html:6
+#: .\templates\news\list.html:4 .\templates\news\list.html:8
+msgid "newss"
+msgstr "Новости"
+
+#: .\templates\base.html:56
+msgid "contacts"
+msgstr "Контакты"
+
+#: .\templates\base.html:65 .\templates\salesman\index.html:6
+msgid "salesmans"
+msgstr "Продавцы"
+
+#: .\templates\base.html:66 .\templates\category\index.html:6
+msgid "categorys"
+msgstr "Категории"
+
+#: .\templates\base.html:73 .\templates\report\index.html:4
+#: .\templates\report\index.html:8 .\templates\report\report_1.html:4
+#: .\templates\report\report_1.html:8 .\templates\report\report_2.html:4
+#: .\templates\report\report_2.html:8 .\templates\report\report_3.html:4
+#: .\templates\report\report_3.html:8
+msgid "reports"
+msgstr "Отчеты"
+
+#: .\templates\base.html:75
+msgid "My account"
+msgstr "Моя учтеная запись"
+
+#: .\templates\base.html:76
+msgid "Change password"
+msgstr "Изменить пароль"
+
+#: .\templates\base.html:78
+msgid "Log out"
+msgstr "Выход"
+
+#: .\templates\base.html:83
+msgid "Log In"
+msgstr "Войти"
+
+#: .\templates\base.html:84
+msgid "Sign up"
+msgstr "Зарегистрироваться"
+
+#: .\templates\category\create.html:3 .\templates\category\index.html:7
+#: .\templates\news\index.html:9 .\templates\product\create.html:3
+#: .\templates\product\index.html:7 .\templates\salesman\create.html:3
+#: .\templates\salesman\index.html:7
+msgid "Add"
+msgstr "Добавить"
+
+#: .\templates\category\create.html:12 .\templates\category\edit.html:12
+#: .\templates\news\create.html:13 .\templates\news\edit.html:13
+#: .\templates\product\create.html:12 .\templates\product\edit.html:12
+#: .\templates\salesman\create.html:12 .\templates\salesman\edit.html:12
+msgid "Save"
+msgstr "Сохранить"
+
+#: .\templates\category\create.html:13 .\templates\category\edit.html:13
+#: .\templates\category\read.html:18 .\templates\news\create.html:14
+#: .\templates\news\edit.html:14 .\templates\news\read.html:29
+#: .\templates\product\create.html:13 .\templates\product\edit.html:13
+#: .\templates\product\read.html:38 .\templates\report\report_1.html:58
+#: .\templates\report\report_2.html:70 .\templates\report\report_3.html:56
+#: .\templates\salesman\create.html:13 .\templates\salesman\edit.html:13
+#: .\templates\salesman\read.html:19
+msgid "Back"
+msgstr "Назад"
+
+#: .\templates\category\edit.html:3 .\templates\category\index.html:24
+#: .\templates\news\edit.html:3 .\templates\news\index.html:30
+#: .\templates\product\edit.html:3 .\templates\product\index.html:38
+#: .\templates\salesman\edit.html:3 .\templates\salesman\index.html:26
+msgid "Change"
+msgstr "Изменить"
+
+#: .\templates\category\index.html:3 .\templates\product\index.html:3
+#: .\templates\product\list.html:3 .\templates\salesman\index.html:3
+msgid "List"
+msgstr "Список"
+
+#: .\templates\category\index.html:25 .\templates\category\read.html:3
+#: .\templates\news\index.html:31 .\templates\product\index.html:39
+#: .\templates\product\read.html:3 .\templates\salesman\index.html:27
+#: .\templates\salesman\read.html:3
+msgid "View"
+msgstr "Просмотреть"
+
+#: .\templates\category\index.html:26 .\templates\news\index.html:32
+#: .\templates\product\index.html:40 .\templates\salesman\index.html:28
+msgid "Delete"
+msgstr "Удалить"
+
+#: .\templates\contact.html:7
+msgid "Contacts"
+msgstr "Контакты"
+
+#: .\templates\index.html:4 .\templates\registration\logged_out.html:4
+#: .\templates\registration\login.html:4
+#: .\templates\registration\password_change_done.html:3
+#: .\templates\registration\password_change_form.html:3
+#: .\templates\registration\password_reset_complete.html:4
+#: .\templates\registration\password_reset_confirm.html:4
+#: .\templates\registration\password_reset_done.html:4
+#: .\templates\registration\password_reset_form.html:4
+#: .\templates\registration\register_done.html:4
+msgid "App Name"
+msgstr "Price"
+
+#: .\templates\news\create.html:3
+msgid "Create"
+msgstr "Добавить"
+
+#: .\templates\news\create.html:6 .\templates\news\edit.html:6
+#: .\templates\news\read.html:7
+msgid "news"
+msgstr "Новости"
+
+#: .\templates\news\list.html:14 .\templates\product\list.html:74
+msgid "Search"
+msgstr "Поиск"
+
+#: .\templates\news\list.html:15 .\templates\product\list.html:75
+msgid "Reset"
+msgstr "Сброс"
+
+#: .\templates\news\read.html:4
+msgid "Read"
+msgstr "Просмотреть"
+
+#: .\templates\product\create.html:5 .\templates\product\edit.html:5
+#: .\templates\product\read.html:5
+msgid "product"
+msgstr "Товар"
+
+#: .\templates\product\list.html:16
+msgid "Date range"
+msgstr "Диапазон дат"
+
+#: .\templates\report\index.html:12 .\templates\report\report_1.html:11
+msgid "current, max, min, avg"
+msgstr "Текущая, максимальная, миниальная и средняя цена"
+
+#: .\templates\report\index.html:13
+msgid "top 10"
+msgstr "Первые 10 записей"
+
+#: .\templates\report\index.html:14 .\templates\report\report_3.html:11
+#: .\templates\report\report_3.html:22
+msgid "growth/decline"
+msgstr "Рост/снижение"
+
+#: .\templates\report\report_1.html:20 .\templates\report\report_2.html:20
+#: .\templates\report\report_2.html:50 .\templates\report\report_3.html:20
+msgid "current"
+msgstr "Текущая цена"
+
+#: .\templates\report\report_1.html:21
+msgid "max"
+msgstr "Максимальная цена"
+
+#: .\templates\report\report_1.html:22
+msgid "min"
+msgstr "Минимальная цена"
+
+#: .\templates\report\report_1.html:23
+msgid "avg"
+msgstr "Средняя цена"
+
+#: .\templates\report\report_2.html:11
+msgid "top 10 max"
+msgstr "10 самых дорогих товаров"
+
+#: .\templates\report\report_2.html:41
+msgid "top 10 min"
+msgstr "10 самых дешевых товаров"
+
+#: .\templates\report\report_3.html:21
+msgid "prev"
+msgstr "Предыдущая цена"

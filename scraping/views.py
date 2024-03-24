@@ -70,21 +70,6 @@ def index(request):
         print(exception)
         return HttpResponse(exception)    
 
-from django.http import JsonResponse
-def population_chart(request):
-    labels = []
-    data = []
-
-    queryset = Product.objects.order_by('-price')[:5]
-    for product in queryset:
-        labels.append(product.title)
-        data.append(product.price)
-    
-    return JsonResponse(data={
-        'labels': labels,
-        'data': data,
-    })
-
 # Контакты
 def contact(request):
     try:
@@ -110,14 +95,14 @@ def report_index(request):
 def report_1(request):
     try:
         report = Product.objects.raw("""
-SELECT 1 as id, salesman.title AS salesman_title, category.title AS category_title, product.title,
+SELECT 1 as id, product.salesman_id, salesman.title AS salesman_title, product.category_id, category.title AS category_title, product.title,
 (SELECT price FROM product p WHERE p.salesman_id=product.salesman_id AND p.category_id=product.category_id AND p.title=product.title AND p.dateb=(SELECT MAX(dateb) FROM product d WHERE p.salesman_id=d.salesman_id AND p.category_id=d.category_id AND p.title=d.title)) AS current_price,
 (SELECT MAX(price) FROM product p WHERE p.salesman_id=product.salesman_id AND p.category_id=product.category_id AND p.title=product.title) AS max_price,
 (SELECT MIN(price) FROM product p WHERE p.salesman_id=product.salesman_id AND p.category_id=product.category_id AND p.title=product.title) AS min_price,
 (SELECT AVG(price) FROM product p WHERE p.salesman_id=product.salesman_id AND p.category_id=product.category_id AND p.title=product.title) AS avg_price
 FROM product LEFT JOIN salesman ON product.salesman_id = salesman.id
 LEFT JOIN category ON product.category_id = category.id
-GROUP BY salesman.title, category.title, product.title
+GROUP BY product.salesman_id, salesman.title, product.category_id, category.title, product.title
 """)
         return render(request, "report/report_1.html", {"report": report,})                
     except Exception as exception:
@@ -129,7 +114,25 @@ GROUP BY salesman.title, category.title, product.title
 @group_required("Managers")
 def report_2(request):
     try:
-        return render(request, "report/report_2.html", {})         
+        report_max10 = Product.objects.raw("""
+SELECT 1 as id, salesman.title AS salesman_title, category.title AS category_title, product.title, product.price
+FROM product LEFT JOIN salesman ON product.salesman_id = salesman.id
+LEFT JOIN category ON product.category_id = category.id
+WHERE product.price>0 AND product.dateb=(SELECT MAX(dateb) FROM product p WHERE product.salesman_id=p.salesman_id AND product.category_id=p.category_id AND product.title=p.title)
+GROUP BY salesman.title, category.title, product.title, product.price
+ORDER BY product.price DESC
+LIMIT 10
+""")
+        report_min10 = Product.objects.raw("""
+SELECT 1 as id, salesman.title AS salesman_title, category.title AS category_title, product.title, product.price
+FROM product LEFT JOIN salesman ON product.salesman_id = salesman.id
+LEFT JOIN category ON product.category_id = category.id
+WHERE product.price>0 AND product.dateb=(SELECT MAX(dateb) FROM product p WHERE product.salesman_id=p.salesman_id AND product.category_id=p.category_id AND product.title=p.title)
+GROUP BY salesman.title, category.title, product.title, product.price
+ORDER BY product.price 
+LIMIT 10
+""")
+        return render(request, "report/report_2.html", {"report_max10": report_max10, "report_min10": report_min10,})         
     except Exception as exception:
         print(exception)
         return HttpResponse(exception)
@@ -139,7 +142,46 @@ def report_2(request):
 @group_required("Managers")
 def report_3(request):
     try:
-        return render(request, "report/report_3.html", {})        
+        report = Product.objects.raw("""
+SELECT 1 as id, product.salesman_id, salesman.title AS salesman_title, product.category_id, category.title AS category_title, product.title,
+(SELECT price FROM product p WHERE p.salesman_id=product.salesman_id AND p.category_id=product.category_id AND p.title=product.title AND p.dateb=(SELECT MAX(dateb) FROM product d WHERE p.salesman_id=d.salesman_id AND p.category_id=d.category_id AND p.title=d.title)) AS current_price,
+COALESCE (
+(SELECT price FROM product p 
+WHERE p.salesman_id=product.salesman_id AND p.category_id=product.category_id AND p.title=product.title 
+ORDER BY p.dateb DESC
+LIMIT 1 OFFSET 1
+), 0) as prev_price,
+CASE  
+	WHEN 
+		COALESCE (
+		(SELECT price FROM product p 
+		WHERE p.salesman_id=product.salesman_id AND p.category_id=product.category_id AND p.title=product.title 
+		ORDER BY p.dateb DESC
+		LIMIT 1 OFFSET 1
+		), 0) <> 0
+	THEN 
+		CAST(
+        (SELECT price FROM product p WHERE p.salesman_id=product.salesman_id AND p.category_id=product.category_id AND p.title=product.title AND p.dateb=(SELECT MAX(dateb) FROM product d WHERE p.salesman_id=d.salesman_id AND p.category_id=d.category_id AND p.title=d.title))*100 
+        AS REAL)
+        /
+        CAST(
+        COALESCE (
+        (SELECT price FROM product p 
+        WHERE p.salesman_id=product.salesman_id AND p.category_id=product.category_id AND p.title=product.title 
+        ORDER BY p.dateb DESC
+        LIMIT 1 OFFSET 1
+        ), 0)
+        AS REAL)
+        -100
+	ELSE null
+END 
+AS proc
+FROM product LEFT JOIN salesman ON product.salesman_id = salesman.id
+LEFT JOIN category ON product.category_id = category.id
+GROUP BY product.salesman_id, salesman.title, product.category_id, category.title, product.title
+ORDER BY salesman.title,category.title, product.title
+""")
+        return render(request, "report/report_3.html", {"report": report,})     
     except Exception as exception:
         print(exception)
         return HttpResponse(exception)

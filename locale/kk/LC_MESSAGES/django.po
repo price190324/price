@@ -1,0 +1,301 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-03-24 09:50+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+#: .\scraping\forms.py:56 .\scraping\models.py:39
+#: .\templates\product\index.html:18 .\templates\product\list.html:27
+#: .\templates\product\list.html:89 .\templates\report\report_1.html:17
+#: .\templates\report\report_2.html:17 .\templates\report\report_2.html:47
+#: .\templates\report\report_3.html:17 .\templates\salesman\create.html:5
+#: .\templates\salesman\edit.html:5 .\templates\salesman\read.html:5
+msgid "salesman"
+msgstr "Сатушы"
+
+#: .\scraping\forms.py:57 .\scraping\models.py:76
+#: .\templates\category\index.html:14 .\templates\product\index.html:14
+#: .\templates\product\list.html:85 .\templates\report\report_1.html:18
+#: .\templates\report\report_2.html:18 .\templates\report\report_2.html:48
+#: .\templates\report\report_3.html:18
+msgid "category_title"
+msgstr "Санат атауы"
+
+#: .\scraping\forms.py:64 .\scraping\forms.py:84
+msgid "Wrong date and time format"
+msgstr "Күн немесе уақыт пішімі дұрыс емес"
+
+#: .\scraping\models.py:37 .\scraping\models.py:89
+msgid "url"
+msgstr "Тауар карточкасы"
+
+#: .\scraping\models.py:38 .\scraping\models.py:90
+#: .\templates\product\index.html:19 .\templates\product\list.html:90
+msgid "dateb"
+msgstr "Талдаудың күні мен уақыты"
+
+#: .\scraping\models.py:40 .\templates\category\create.html:5
+#: .\templates\category\edit.html:5 .\templates\category\read.html:5
+#: .\templates\product\list.html:46
+msgid "category"
+msgstr "Санат"
+
+#: .\scraping\models.py:41 .\templates\news\index.html:15
+#: .\templates\product\list.html:65
+msgid "title"
+msgstr "Атауы"
+
+#: .\scraping\models.py:42 .\scraping\models.py:94
+msgid "description"
+msgstr "Сипаттама"
+
+#: .\scraping\models.py:43 .\scraping\models.py:95
+#: .\templates\product\index.html:16 .\templates\product\list.html:87
+#: .\templates\product\read.html:18
+msgid "price"
+msgstr "Бағасы"
+
+#: .\scraping\models.py:44 .\scraping\models.py:96
+#: .\templates\product\index.html:17 .\templates\product\list.html:88
+#: .\templates\product\read.html:16
+msgid "code"
+msgstr "Тауар коды"
+
+#: .\scraping\models.py:45 .\scraping\models.py:97
+msgid "photo_url"
+msgstr "Фотосуретке сілтеме"
+
+#: .\scraping\models.py:62 .\templates\salesman\index.html:14
+msgid "salesman_title"
+msgstr "Сатушының аты"
+
+#: .\scraping\models.py:63 .\templates\salesman\index.html:15
+msgid "site"
+msgstr "Сайт мекенжайы"
+
+#: .\scraping\models.py:93 .\templates\product\index.html:15
+#: .\templates\product\list.html:86 .\templates\report\report_1.html:19
+#: .\templates\report\report_2.html:19 .\templates\report\report_2.html:49
+#: .\templates\report\report_3.html:19
+msgid "product_title"
+msgstr "Тауардың атауы"
+
+#: .\scraping\models.py:117 .\templates\news\index.html:14
+msgid "daten"
+msgstr "Күні"
+
+#: .\scraping\models.py:118
+msgid "news_title"
+msgstr "Тақырып жаңалықтар"
+
+#: .\scraping\models.py:119
+msgid "news_details"
+msgstr "Толығырақ жаңалықтар"
+
+#: .\scraping\models.py:120
+msgid "news_photo"
+msgstr "Фото"
+
+#: .\templates\base.html:48
+msgid "Home"
+msgstr "Басты бет"
+
+#: .\templates\base.html:50 .\templates\base.html:67
+#: .\templates\product\index.html:6 .\templates\product\list.html:7
+msgid "products"
+msgstr "Тауарлар"
+
+#: .\templates\base.html:53 .\templates\base.html:69
+#: .\templates\news\index.html:3 .\templates\news\index.html:6
+#: .\templates\news\list.html:4 .\templates\news\list.html:8
+msgid "newss"
+msgstr "Жаңалықтар"
+
+#: .\templates\base.html:56
+msgid "contacts"
+msgstr "Байланыс"
+
+#: .\templates\base.html:65 .\templates\salesman\index.html:6
+msgid "salesmans"
+msgstr "Сатушылар"
+
+#: .\templates\base.html:66 .\templates\category\index.html:6
+msgid "categorys"
+msgstr "Санаттар"
+
+#: .\templates\base.html:73 .\templates\report\index.html:4
+#: .\templates\report\index.html:8 .\templates\report\report_1.html:4
+#: .\templates\report\report_1.html:8 .\templates\report\report_2.html:4
+#: .\templates\report\report_2.html:8 .\templates\report\report_3.html:4
+#: .\templates\report\report_3.html:8
+msgid "reports"
+msgstr "Есептер"
+
+#: .\templates\base.html:75
+msgid "My account"
+msgstr "Менің есептік жазбам"
+
+#: .\templates\base.html:76
+msgid "Change password"
+msgstr "Құпия сөзді өзгерту"
+
+#: .\templates\base.html:78
+msgid "Log out"
+msgstr "Шығу"
+
+#: .\templates\base.html:83
+msgid "Log In"
+msgstr "Кіру"
+
+#: .\templates\base.html:84
+msgid "Sign up"
+msgstr "Тіркелу"
+
+#: .\templates\category\create.html:3 .\templates\category\index.html:7
+#: .\templates\news\index.html:9 .\templates\product\create.html:3
+#: .\templates\product\index.html:7 .\templates\salesman\create.html:3
+#: .\templates\salesman\index.html:7
+msgid "Add"
+msgstr "Қосу"
+
+#: .\templates\category\create.html:12 .\templates\category\edit.html:12
+#: .\templates\news\create.html:13 .\templates\news\edit.html:13
+#: .\templates\product\create.html:12 .\templates\product\edit.html:12
+#: .\templates\salesman\create.html:12 .\templates\salesman\edit.html:12
+msgid "Save"
+msgstr "Сақтау"
+
+#: .\templates\category\create.html:13 .\templates\category\edit.html:13
+#: .\templates\category\read.html:18 .\templates\news\create.html:14
+#: .\templates\news\edit.html:14 .\templates\news\read.html:29
+#: .\templates\product\create.html:13 .\templates\product\edit.html:13
+#: .\templates\product\read.html:38 .\templates\report\report_1.html:58
+#: .\templates\report\report_2.html:70 .\templates\report\report_3.html:56
+#: .\templates\salesman\create.html:13 .\templates\salesman\edit.html:13
+#: .\templates\salesman\read.html:19
+msgid "Back"
+msgstr "Артқа"
+
+#: .\templates\category\edit.html:3 .\templates\category\index.html:24
+#: .\templates\news\edit.html:3 .\templates\news\index.html:30
+#: .\templates\product\edit.html:3 .\templates\product\index.html:38
+#: .\templates\salesman\edit.html:3 .\templates\salesman\index.html:26
+msgid "Change"
+msgstr "Өзгерту"
+
+#: .\templates\category\index.html:3 .\templates\product\index.html:3
+#: .\templates\product\list.html:3 .\templates\salesman\index.html:3
+msgid "List"
+msgstr "Тізім"
+
+#: .\templates\category\index.html:25 .\templates\category\read.html:3
+#: .\templates\news\index.html:31 .\templates\product\index.html:39
+#: .\templates\product\read.html:3 .\templates\salesman\index.html:27
+#: .\templates\salesman\read.html:3
+msgid "View"
+msgstr "Көру"
+
+#: .\templates\category\index.html:26 .\templates\news\index.html:32
+#: .\templates\product\index.html:40 .\templates\salesman\index.html:28
+msgid "Delete"
+msgstr "Жою"
+
+#: .\templates\contact.html:7
+msgid "Contacts"
+msgstr "Байланыс"
+
+#: .\templates\index.html:4 .\templates\registration\logged_out.html:4
+#: .\templates\registration\login.html:4
+#: .\templates\registration\password_change_done.html:3
+#: .\templates\registration\password_change_form.html:3
+#: .\templates\registration\password_reset_complete.html:4
+#: .\templates\registration\password_reset_confirm.html:4
+#: .\templates\registration\password_reset_done.html:4
+#: .\templates\registration\password_reset_form.html:4
+#: .\templates\registration\register_done.html:4
+msgid "App Name"
+msgstr "Price"
+
+#: .\templates\news\create.html:3
+msgid "Create"
+msgstr "Қосу"
+
+#: .\templates\news\create.html:6 .\templates\news\edit.html:6
+#: .\templates\news\read.html:7
+msgid "news"
+msgstr "Жаңалықтар"
+
+#: .\templates\news\list.html:14 .\templates\product\list.html:74
+msgid "Search"
+msgstr "Іздеу"
+
+#: .\templates\news\list.html:15 .\templates\product\list.html:75
+msgid "Reset"
+msgstr "Қайта"
+
+#: .\templates\news\read.html:4
+msgid "Read"
+msgstr "Көру"
+
+#: .\templates\product\create.html:5 .\templates\product\edit.html:5
+#: .\templates\product\read.html:5
+msgid "product"
+msgstr "Тауар"
+
+#: .\templates\product\list.html:16
+msgid "Date range"
+msgstr "Күндер ауқымы"
+
+#: .\templates\report\index.html:12 .\templates\report\report_1.html:11
+msgid "current, max, min, avg"
+msgstr "Ағымдағы, максималды, минималды және орташа баға"
+
+#: .\templates\report\index.html:13
+msgid "top 10"
+msgstr "Первые 10 записей"
+
+#: .\templates\report\index.html:14 .\templates\report\report_3.html:11
+#: .\templates\report\report_3.html:22
+msgid "growth/decline"
+msgstr "Өсу / төмендеу"
+
+#: .\templates\report\report_1.html:20 .\templates\report\report_2.html:20
+#: .\templates\report\report_2.html:50 .\templates\report\report_3.html:20
+msgid "current"
+msgstr "Ағымдағы баға"
+
+#: .\templates\report\report_1.html:21
+msgid "max"
+msgstr "Максималды баға"
+
+#: .\templates\report\report_1.html:22
+msgid "min"
+msgstr "Ең төменгі баға"
+
+#: .\templates\report\report_1.html:23
+msgid "avg"
+msgstr "Орташа баға"
+
+#: .\templates\report\report_2.html:11
+msgid "top 10 max"
+msgstr "Ең қымбат 10 өнім"
+
+#: .\templates\report\report_2.html:41
+msgid "top 10 min"
+msgstr "Ең арзан 10 өнім"
+
+#: .\templates\report\report_3.html:21
+msgid "prev"
+msgstr "Алдыңғы баға"

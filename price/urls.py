@@ -33,11 +33,11 @@ urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),
 
     path('report/index/', views.report_index, name='report_index'),
-    path('population-chart/', views.population_chart, name='population-chart'),
+    #path('growth_decline-chart/', views.growth_decline_chart, name='growth_decline-chart'),
     path('report/report_1/', views.report_1, name='report_1'),
     path('report/report_2/', views.report_2, name='report_2'),
     path('report/report_3/', views.report_3, name='report_3'),
-
+    
     #path('basket/index/', views.basket_index, name='basket_index'),
     #path('basket/create/', views.basket_create, name='basket_create'),
     #path('basket/edit/<int:id>/', views.basket_edit, name='basket_edit'),

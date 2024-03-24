@@ -3,7 +3,9 @@
 {% block title %}{% trans "List" %}{% endblock title %}
 {% block header %}{% endblock header %}
 {% block content %}
-<h2>{% trans "products" %}</h2>
+<div class="div-width-100-text-center">
+	<h3>{% trans "products" %}</h3>
+</div>
 <div class="row" style="margin: 10px">
 	<form method="POST" enctype="multipart/form-data">
 		{% csrf_token %}
@@ -77,7 +79,7 @@
 <hr>
 {% if product.count > 0 %}
 <div class="row">
-	<table id="myTable" class="table-manager" style="width:100%">
+	<table id="table" class="table-manager" style="width:100%">
 		<thead>
 			<tr>
 				<th><p>{% trans "category_title" %}</p></th>
@@ -107,5 +109,8 @@
 	</table>
 </div>
 {% endif %}
+<script type="text/javascript">
+	$(".chosen").chosen();
+</script>
 {% endblock content %}
 

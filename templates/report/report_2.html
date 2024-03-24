@@ -7,58 +7,60 @@
 <div class="div-width-100-text-center">
 	<h3>{% trans "reports" %}</h3>
 </div>
-<form method="POST" enctype="multipart/form-data">
-	{% csrf_token %}
-	<div style="margin-top:10px">
-		<p>{% trans "Date range" %}:		
-			<input type="date" value="{{start_date}}" name ="start_date" id ="start_date">
-			<input type="date" value="{{finish_date}}" name = "finish_date" id ="finish_date">
-		</p>
-		<p>{% trans "gruppa" %}:
-			<select name="item_gruppa" class="chosen" style="margin:5px">
-				<option value="-----">-----</option>
-				{% for entry in gruppa %}
-					{% if entry.cipher == selected_item_gruppa %}
-						<option value="{{ entry.cipher }}" selected="selected">{{ entry.cipher }}</option>
-					{% else %}
-						<option value="{{ entry.cipher }}">{{ entry.cipher }}</option>
-					{% endif %}
-				{% endfor %}
-			</select>
-		</p>
-	</div>
-	<div class="row" style="margin-top:10px">
-		<button class="btn btn-outline-success" name="searchBtn" style="width:120px; margin:5px">{% trans "Go" %}</button>
-		<button class="btn btn-outline-primary" name="resetBtn" type="submit" onClick="window.location.reload();" style="width:120px; margin:5px">{% trans "Reset" %}</button>
-	</div>
-</form>
-<hr>
 <div class="row">
-	<h1>{% trans "visits" %}</h1>
+	<h1>{% trans "top 10 max" %}</h1>
 </div>
 <div class="row">
-	<table id="myTable" class="table-manager" style="width:100%">
+	<table id="table1" class="table-manager" style="width:100%">
 		<thead>
 			<tr>
-				<th><p>{% trans "schedule" %}</p></th>
-				<th><p>{% trans "student" %}</p></th>
-				<th><p>{% trans "visited" %}</p></th>
+				<th><p>{% trans "salesman" %}</p></th>
+				<th><p>{% trans "category_title" %}</p></th>
+				<th><p>{% trans "product_title" %}</p></th>
+				<th><p>{% trans "current" %}</p></th>
 			</tr>
 		</thead>
 		<tbody>
-			{% for v in visit %}
+			{% for q in report_max10 %}
 			<tr>
-				<td><p>{{ v.schedule }}</p></td>	
-				<td><p>{{ v.student }}</p></td>	
+				<td><p>{{ q.salesman_title }}</p></td>	
+				<td><p>{{ q.category_title }}</p></td>	
+				<td><p>{{ q.title }}</p></td>		
 				<td>
-					<p>
-					{% if v.visited == True %}
-						<b>■</b>
-					{% else %}
-						<b>□</b>
+					{% if q.price != 0 %}
+					<p>{{ q.price | stringformat:"1.0f" }} 〒</p>
 					{% endif %}
-					</p>
-				</td>			
+				</td>												
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+<hr>
+<div class="row">
+	<h1>{% trans "top 10 min" %}</h1>
+</div>
+<div class="row">
+	<table id="table2" class="table-manager" style="width:100%">
+		<thead>
+			<tr>
+				<th><p>{% trans "salesman" %}</p></th>
+				<th><p>{% trans "category_title" %}</p></th>
+				<th><p>{% trans "product_title" %}</p></th>
+				<th><p>{% trans "current" %}</p></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for q in report_min10 %}
+			<tr>
+				<td><p>{{ q.salesman_title }}</p></td>	
+				<td><p>{{ q.category_title }}</p></td>	
+				<td><p>{{ q.title }}</p></td>		
+				<td>
+					{% if q.price != 0 %}
+					<p>{{ q.price | stringformat:"1.0f" }} 〒</p>
+					{% endif %}
+				</td>												
 			</tr>
 			{% endfor %}
 		</tbody>
