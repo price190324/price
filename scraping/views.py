@@ -94,6 +94,49 @@ def report_index(request):
 @group_required("Managers")
 def report_1(request):
     try:
+        where = ""
+        salesman = Salesman.objects.all().order_by('title')
+        category = Category.objects.all().order_by('title')
+        selected_item_category = None
+        selected_item_salesman = None
+        title_search = "" 
+        if request.method == "POST":
+            # Определить какая кнопка нажата
+            if 'searchBtn' in request.POST:
+                
+                # Поиск по категории
+                selected_item_category = request.POST.get('item_category')
+                print(selected_item_category)
+                if selected_item_category != '-----':
+                    category_query = Category.objects.filter(title = selected_item_category).only('id').all()
+                    if category_query != None:
+                        for x in category_query:
+                            if where != "":
+                                where = where + " AND "
+                            where = where + "category.title = '" + str(x) + "'"                        
+                    #report = report.filter(category_id__in = category_query)
+                # Поиск по продавцу
+                selected_item_salesman = request.POST.get('item_salesman')
+                #print(selected_item_salesman)
+                if selected_item_salesman != '-----':
+                    salesman_query = Salesman.objects.filter(title = selected_item_salesman).only('id').all()
+                    if salesman_query != None:
+                        for x in salesman_query:
+                            if where != "":
+                                where = where + " AND "
+                            where = where + "salesman.title = '" + str(x) + "'"
+                    #report = report.filter(salesman_id__in = salesman_query)      
+                # Поиск по названию 
+                title_search = request.POST.get("title_search")                
+                #print(title_search)                
+                if title_search != '':
+                    if where != "":
+                        where = where + " AND "
+                        where = where + "product.title LIKE '%" + title_search + "%'"
+                    #report = report.filter(title__contains = title_search)  
+                if where != "":
+                    where = " WHERE " + where + " "              
+                print(where) 
         report = Product.objects.raw("""
 SELECT 1 as id, product.salesman_id, salesman.title AS salesman_title, product.category_id, category.title AS category_title, product.title,
 (SELECT price FROM product p WHERE p.salesman_id=product.salesman_id AND p.category_id=product.category_id AND p.title=product.title AND p.dateb=(SELECT MAX(dateb) FROM product d WHERE p.salesman_id=d.salesman_id AND p.category_id=d.category_id AND p.title=d.title) LIMIT 1) AS current_price,
@@ -102,12 +145,17 @@ SELECT 1 as id, product.salesman_id, salesman.title AS salesman_title, product.c
 (SELECT AVG(price) FROM product p WHERE p.salesman_id=product.salesman_id AND p.category_id=product.category_id AND p.title=product.title) AS avg_price
 FROM product LEFT JOIN salesman ON product.salesman_id = salesman.id
 LEFT JOIN category ON product.category_id = category.id
+""" + where +
+"""
 GROUP BY product.salesman_id, salesman.title, product.category_id, category.title, product.title
 """)
-        return render(request, "report/report_1.html", {"report": report,})                
+        return render(request, "report/report_1.html", {"report": report, "category": category, "selected_item_category": selected_item_category,  "salesman": salesman, "selected_item_salesman": selected_item_salesman, "title_search": title_search })    
+
+        #return render(request, "report/report_1.html", {"report": report,})                
     except Exception as exception:
         print(exception)
         return HttpResponse(exception)
+           
 
 # Отчет 2
 @login_required
@@ -142,6 +190,49 @@ LIMIT 10
 @group_required("Managers")
 def report_3(request):
     try:
+        where = ""
+        salesman = Salesman.objects.all().order_by('title')
+        category = Category.objects.all().order_by('title')
+        selected_item_category = None
+        selected_item_salesman = None
+        title_search = "" 
+        if request.method == "POST":
+            # Определить какая кнопка нажата
+            if 'searchBtn' in request.POST:
+                
+                # Поиск по категории
+                selected_item_category = request.POST.get('item_category')
+                print(selected_item_category)
+                if selected_item_category != '-----':
+                    category_query = Category.objects.filter(title = selected_item_category).only('id').all()
+                    if category_query != None:
+                        for x in category_query:
+                            if where != "":
+                                where = where + " AND "
+                            where = where + "category.title = '" + str(x) + "'"                        
+                    #report = report.filter(category_id__in = category_query)
+                # Поиск по продавцу
+                selected_item_salesman = request.POST.get('item_salesman')
+                #print(selected_item_salesman)
+                if selected_item_salesman != '-----':
+                    salesman_query = Salesman.objects.filter(title = selected_item_salesman).only('id').all()
+                    if salesman_query != None:
+                        for x in salesman_query:
+                            if where != "":
+                                where = where + " AND "
+                            where = where + "salesman.title = '" + str(x) + "'"
+                    #report = report.filter(salesman_id__in = salesman_query)      
+                # Поиск по названию 
+                title_search = request.POST.get("title_search")                
+                #print(title_search)                
+                if title_search != '':
+                    if where != "":
+                        where = where + " AND "
+                        where = where + "product.title LIKE '%" + title_search + "%'"
+                    #report = report.filter(title__contains = title_search)  
+                if where != "":
+                    where = " WHERE " + where + " "              
+                print(where) 
         report = Product.objects.raw("""
 SELECT 1 as id, product.salesman_id, salesman.title AS salesman_title, product.category_id, category.title AS category_title, product.title,
 (SELECT price FROM product p WHERE p.salesman_id=product.salesman_id AND p.category_id=product.category_id AND p.title=product.title AND p.dateb=(SELECT MAX(dateb) FROM product d WHERE p.salesman_id=d.salesman_id AND p.category_id=d.category_id AND p.title=d.title) LIMIT 1) AS current_price,
@@ -178,10 +269,13 @@ END
 AS proc
 FROM product LEFT JOIN salesman ON product.salesman_id = salesman.id
 LEFT JOIN category ON product.category_id = category.id
+""" + where +
+"""
+
 GROUP BY product.salesman_id, salesman.title, product.category_id, category.title, product.title
 ORDER BY salesman.title,category.title, product.title
 """)
-        return render(request, "report/report_3.html", {"report": report,})     
+        return render(request, "report/report_3.html", {"report": report, "category": category, "selected_item_category": selected_item_category,  "salesman": salesman, "selected_item_salesman": selected_item_salesman, "title_search": title_search })    
     except Exception as exception:
         print(exception)
         return HttpResponse(exception)
