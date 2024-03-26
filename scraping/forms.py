@@ -43,7 +43,7 @@ class ProductForm(forms.ModelForm):
         fields = ('url', 'dateb', 'salesman', 'category', 'title', 'description', 'price', 'code', 'photo_url')
         widgets = {
             'url': TextInput(attrs={"size":"100"}),
-            'dateb': DateInput(attrs={"type":"date"}),
+            'dateb': DateTimeInput(format='%d/%m/%Y %H:%M:%S'),
             'salesman': forms.Select(attrs={'class': 'chosen'}),
             'category': forms.Select(attrs={'class': 'chosen'}),            
             'title': TextInput(attrs={"size":"100"}),
@@ -56,14 +56,15 @@ class ProductForm(forms.ModelForm):
             'salesman': _('salesman'),            
             'category': _('category_title'),            
         }
-    # Метод-валидатор для поля birthday
-    def clean_birthday(self):        
+        # Метод-валидатор для поля dateb
+    def clean_dateb(self):        
         if isinstance(self.cleaned_data['dateb'], datetime.date) == True:
             data = self.cleaned_data['dateb']
+            #print(data)        
         else:
             raise forms.ValidationError(_('Wrong date and time format'))
         # Метод-валидатор обязательно должен вернуть очищенные данные, даже если не изменил их
-        return data    
+        return data   
 
 # Новости
 class NewsForm(forms.ModelForm):

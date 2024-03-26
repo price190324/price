@@ -64,8 +64,9 @@ def group_required(*group_names):
 # Стартовая страница 
 def index(request):
     try:
+        product = Product.objects.all().order_by('-dateb')[0:20]
         news14 = News.objects.all().order_by('-daten')[0:4]
-        return render(request, "index.html", {"news14": news14, })            
+        return render(request, "index.html", {"product": product, "news14": news14, })            
     except Exception as exception:
         print(exception)
         return HttpResponse(exception)    
@@ -195,6 +196,8 @@ def report_3(request):
         category = Category.objects.all().order_by('title')
         selected_item_category = None
         selected_item_salesman = None
+        choiceMode = None
+        choice = request.POST.get('choiceMode')
         title_search = "" 
         if request.method == "POST":
             # Определить какая кнопка нажата
@@ -202,7 +205,7 @@ def report_3(request):
                 
                 # Поиск по категории
                 selected_item_category = request.POST.get('item_category')
-                print(selected_item_category)
+                #print(selected_item_category)
                 if selected_item_category != '-----':
                     category_query = Category.objects.filter(title = selected_item_category).only('id').all()
                     if category_query != None:
@@ -230,6 +233,53 @@ def report_3(request):
                         where = where + " AND "
                         where = where + "product.title LIKE '%" + title_search + "%'"
                     #report = report.filter(title__contains = title_search)  
+                # Поиск
+                if (request.POST.get("choiceMode") == "ALL"):
+                    print("All")            
+                elif (request.POST.get("choiceMode") == "Increase"):
+                    print("Increase")              
+                    if where != "":
+                        where = where + " AND "
+                    where = where + """(SELECT price FROM product p WHERE p.salesman_id=product.salesman_id AND p.category_id=product.category_id AND p.title=product.title AND p.dateb=(SELECT MAX(dateb) FROM product d WHERE p.salesman_id=d.salesman_id AND p.category_id=d.category_id AND p.title=d.title) LIMIT 1) >
+COALESCE (
+(SELECT price FROM product p 
+WHERE p.salesman_id=product.salesman_id AND p.category_id=product.category_id AND p.title=product.title 
+ORDER BY p.dateb DESC
+LIMIT 1 OFFSET 1
+), 0) 
+AND 
+COALESCE (
+(SELECT price FROM product p 
+WHERE p.salesman_id=product.salesman_id AND p.category_id=product.category_id AND p.title=product.title 
+ORDER BY p.dateb DESC
+LIMIT 1 OFFSET 1
+), 0) != 0 """
+                elif (request.POST.get("choiceMode") == "Reduction"):
+                    print("Reduction")
+                    if where != "":
+                        where = where + " AND "
+                    where = where + """(SELECT price FROM product p WHERE p.salesman_id=product.salesman_id AND p.category_id=product.category_id AND p.title=product.title AND p.dateb=(SELECT MAX(dateb) FROM product d WHERE p.salesman_id=d.salesman_id AND p.category_id=d.category_id AND p.title=d.title) LIMIT 1) <
+COALESCE (
+(SELECT price FROM product p 
+WHERE p.salesman_id=product.salesman_id AND p.category_id=product.category_id AND p.title=product.title 
+ORDER BY p.dateb DESC
+LIMIT 1 OFFSET 1
+), 0) 
+AND 
+COALESCE (
+(SELECT price FROM product p 
+WHERE p.salesman_id=product.salesman_id AND p.category_id=product.category_id AND p.title=product.title 
+ORDER BY p.dateb DESC
+LIMIT 1
+), 0) != 0 
+AND 
+COALESCE (
+(SELECT price FROM product p 
+WHERE p.salesman_id=product.salesman_id AND p.category_id=product.category_id AND p.title=product.title 
+ORDER BY p.dateb DESC
+LIMIT 1 OFFSET 1
+), 0) != 0 """
+                # Добавить ключевое слово WHERE 
                 if where != "":
                     where = " WHERE " + where + " "              
                 print(where) 
@@ -244,6 +294,13 @@ LIMIT 1 OFFSET 1
 ), 0) as prev_price,
 CASE  
 	WHEN 
+		COALESCE (
+		(SELECT price FROM product p 
+		WHERE p.salesman_id=product.salesman_id AND p.category_id=product.category_id AND p.title=product.title 
+		ORDER BY p.dateb DESC
+		LIMIT 1 
+		), 0) <> 0
+		AND
 		COALESCE (
 		(SELECT price FROM product p 
 		WHERE p.salesman_id=product.salesman_id AND p.category_id=product.category_id AND p.title=product.title 
@@ -271,11 +328,10 @@ FROM product LEFT JOIN salesman ON product.salesman_id = salesman.id
 LEFT JOIN category ON product.category_id = category.id
 """ + where +
 """
-
 GROUP BY product.salesman_id, salesman.title, product.category_id, category.title, product.title
 ORDER BY salesman.title,category.title, product.title
 """)
-        return render(request, "report/report_3.html", {"report": report, "category": category, "selected_item_category": selected_item_category,  "salesman": salesman, "selected_item_salesman": selected_item_salesman, "title_search": title_search })    
+        return render(request, "report/report_3.html", {"report": report, "category": category, "selected_item_category": selected_item_category,  "salesman": salesman, "selected_item_salesman": selected_item_salesman, "title_search": title_search, "choice": choice })    
     except Exception as exception:
         print(exception)
         return HttpResponse(exception)
@@ -541,8 +597,8 @@ def product_create(request):
             else:
                 return render(request, "product/create.html", {"form": productform})
         else:        
-            productform = ProductForm()
-            return render(request, "product/create.html", {"form": productform})
+            productform = ProductForm(initial={'dateb': datetime.now().strftime('%Y-%m-%d %H:%M:%S'), })
+            return render(request, "product/create.html", {"form": productform})            
     except Exception as exception:
         print(exception)
         return HttpResponse(exception)
@@ -571,7 +627,7 @@ def product_edit(request, id):
                 return render(request, "product/edit.html", {"form": productform})
         else:
             # Загрузка начальных данных
-            productform = ProductForm(initial={'url': product.url, 'dateb': product.dateb, 'salesman': product.salesman, 'category': product.category, 'title': product.title, 'description': product.description, 'price': product.price, 'code': product.code, 'photo_url': product.photo_url, })
+            productform = ProductForm(initial={'url': product.url, 'dateb': product.dateb.strftime('%Y-%m-%d %H:%M:%S'), 'salesman': product.salesman, 'category': product.category, 'title': product.title, 'description': product.description, 'price': product.price, 'code': product.code, 'photo_url': product.photo_url, })
             return render(request, "product/edit.html", {"form": productform})
     except Product.DoesNotExist:
         return HttpResponseNotFound("<h2>Product not found</h2>")

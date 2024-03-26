@@ -41,9 +41,9 @@ class MainWindow(QMainWindow):
             self.pushButtonMoydom.clicked.connect(lambda: self.open_moydom())
             self.pushButtonImperial = QPushButton("Империал")
             self.pushButtonImperial.clicked.connect(lambda: self.open_imperial())
-            self.pushButtonExport = QPushButton("Экспорт в Django")
+            self.pushButtonExport = QPushButton(msg.export_to_django)
             self.pushButtonExport.clicked.connect(lambda: self.open_export())
-            self.pushButtonCancel = QPushButton("Отмена")
+            self.pushButtonCancel = QPushButton(msg.cancel)
             self.pushButtonCancel.clicked.connect(lambda: self.close())
             # Создаём центральный виджет
             central_widget = QWidget(self)

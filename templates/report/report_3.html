@@ -61,6 +61,34 @@
 						<p><input type="search" value="{{title_search}}" name="title_search"></p>		
 					</td>
 				</tr>
+				<tr>
+					<td>
+						<p>{% trans "growth/decline" %} &nbsp </p>
+					</td>
+					<td>
+						<div class="controls">
+							{% if choice == 'All' or choice == None %} 
+								<p><input type="radio" id="choiceAll" name="choiceMode" value="All" checked> &nbsp; {% trans "doesn't matter" %}</p>
+							{% else %}
+								<p><input type="radio" id="choiceAll" name="choiceMode" value="All"> &nbsp; {% trans "doesn't matter" %}</p>
+							{% endif %}								
+						</div>
+						<div class="controls">							
+							{% if choice == 'Increase' %} 
+								<p><input type="radio" id="choiceIncrease" name="choiceMode" value="Increase" checked> &nbsp; {% trans "price increase" %}</p>
+							{% else %}
+								<p><input type="radio" id="choiceIncrease" name="choiceMode" value="Increase" > &nbsp; {% trans "price increase" %}</p>
+							{% endif %}								
+						</div>
+						<div class="controls">
+							{% if choice == 'Reduction' %} 
+								<p><input type="radio" id="choiceReduction" name="choiceMode" value="Reduction" checked> &nbsp; {% trans "price reduction" %}</p>
+							{% else %}
+								<p><input type="radio" id="choiceReduction" name="choiceMode" value="Reduction" > &nbsp; {% trans "price reduction" %}</p>
+							{% endif %}															
+						</div>		
+					</td>
+				</tr>
 			</tbody>
 		</table>				
 		<div class="row">

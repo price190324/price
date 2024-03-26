@@ -13,9 +13,9 @@
 			<div class="row">
 				<div class="col-md-8">				
 					<p>{{ product.description | linebreaks }}</p>
-					<p>{% trans "code" %}: {{ product.code }}</p>
+					<p><b>{% trans "code" %}:</b> {{ product.code }}</p>
 					{% if product.price != 0 %}
-						<p>{% trans "price" %}: {{ product.price | stringformat:"1.0f" }} 〒</p>	
+						<p><b>{% trans "price" %}:</b> {{ product.price | stringformat:"1.0f" }} 〒</p>	
 					{% endif %}						
 				</div>
 				<div class="col-md-4">
@@ -29,7 +29,7 @@
 		
 		</div>
 		<div class="card-footer">
-			<p>{{ product.salesman }}</p>
+			<p><b>{{ product.salesman }}</b></p>
 			<p>{{ product.dateb | date:"d.m.Y H:i"}}</p>		
 		</div>		
 	</div>

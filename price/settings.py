@@ -112,8 +112,6 @@ DATABASES = {
 	    'HOST' : 'dpg-cnv63nn79t8c73d58mc0-a.frankfurt-postgres.render.com',
 	    'PORT' : '5432',
     }
-
-
 }
 
 

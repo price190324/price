@@ -20,7 +20,7 @@
 			{% for p in salesman %}
 			<tr>
 				<td><p>{{ p.title }}</p></td>	
-				<td><p><a href="{{ p.site }}">{{ p.site }}</a></p></td>	
+				<td><p><a href="{{ p.site }}" target="_blank">{{ p.site }}</a></p></td>	
 				<td>						
 					<p>
 					<a href="{% url 'salesman_edit' p.id %}">{% trans "Change" %}</a> |

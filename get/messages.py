@@ -68,5 +68,11 @@ class Messages:
 
     # Специфичные
     export_to_django: str = "Экспорт в Django"
+    main_page_URL: str = "URL основной страницы"
+    start_page: str = "Стартовая страница"
+    finish_page: str = "Финишная страница"
+    pause_to_load_data_page: str = "Пауза для загрузки страницы с данными"
+    pause_to_load_page: str = "Пауза для загрузки страницы"
+    pause_to_switch_between_pages: str = "Пауза для переключения между страницами"
 
 msg = Messages()

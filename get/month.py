@@ -271,12 +271,12 @@ class MonthWindow(QMainWindow):
             self.grid_layout_filter = QGridLayout()
             self.groupBox_settings.setLayout(self.grid_layout_filter)
             # Метки
-            self.label_start_url = QLabel("URL основной страницы")
-            self.label_start_page = QLabel("Стартовая страница")
-            self.label_finish_page = QLabel("Финишная страница") 
-            self.label_pause_data_page = QLabel("Пауза для загрузки страницы с данными")
-            self.label_pause_load_page = QLabel("Пауза для загрузки страницы")
-            self.label_pause_flipping = QLabel("Пауза для переключения между страницами")
+            self.label_start_url = QLabel(msg.main_page_URL)
+            self.label_start_page = QLabel(msg.start_page)
+            self.label_finish_page = QLabel(msg.finish_page) 
+            self.label_pause_data_page = QLabel(msg.pause_to_load_data_page)
+            self.label_pause_load_page = QLabel(msg.pause_to_load_page)
+            self.label_pause_flipping = QLabel(msg.pause_to_switch_between_pages)
             # Поля ввода данных
             self.lineEdit_start_url = QLineEdit(self)
             self.lineEdit_start_url.setText("https://12.kz/categories/smesi-rastvory")
@@ -325,9 +325,9 @@ class MonthWindow(QMainWindow):
             self.grid_layout_filter.addWidget(self.label_pause_flipping, 5, 0, 1, 1)
             self.grid_layout_filter.addWidget(self.doubleSpinBox_pause_flipping, 5, 1, 1, 1)
             # Кнопки
-            self.pushButtonFilter = QPushButton("Выполнить")
+            self.pushButtonFilter = QPushButton(msg.run)
             self.pushButtonFilter.clicked.connect(lambda: self.set_var_and_run())
-            self.pushButtonCancel = QPushButton("Отмена")
+            self.pushButtonCancel = QPushButton(msg.cancel)
             self.pushButtonCancel.clicked.connect(lambda: self.close())
             # Создаём центральный виджет
             central_widget = QWidget(self)
