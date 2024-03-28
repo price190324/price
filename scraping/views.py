@@ -82,7 +82,7 @@ def contact(request):
 ###################################################################################################
 # Отчеты
 @login_required
-@group_required("Managers")
+#@group_required("Managers")
 def report_index(request):
     try:        
         return render(request, "report/index.html")        
@@ -92,7 +92,7 @@ def report_index(request):
 
 # Отчет 1
 @login_required
-@group_required("Managers")
+#@group_required("Managers")
 def report_1(request):
     try:
         where = ""
@@ -156,11 +156,10 @@ GROUP BY product.salesman_id, salesman.title, product.category_id, category.titl
     except Exception as exception:
         print(exception)
         return HttpResponse(exception)
-           
 
 # Отчет 2
 @login_required
-@group_required("Managers")
+#@group_required("Managers")
 def report_2(request):
     try:
         report_max10 = Product.objects.raw("""
@@ -188,7 +187,7 @@ LIMIT 10
 
 # Отчет 3
 @login_required
-@group_required("Managers")
+#@group_required("Managers")
 def report_3(request):
     try:
         where = ""
