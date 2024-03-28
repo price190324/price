@@ -150,7 +150,7 @@ msgstr "Отчеты"
 
 #: .\templates\base.html:72
 msgid "My account"
-msgstr "Моя учтеная запись"
+msgstr "Моя учетная запись"
 
 #: .\templates\base.html:73
 msgid "Change password"
@@ -275,7 +275,7 @@ msgstr "Диапазон дат"
 
 #: .\templates\report\index.html:12 .\templates\report\report_1.html:11
 msgid "current, max, min, avg"
-msgstr "Текущая, максимальная, миниальная и средняя цена"
+msgstr "Текущая, максимальная, минимальная и средняя цена"
 
 #: .\templates\report\index.html:13
 msgid "top 10"
